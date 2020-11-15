@@ -14,14 +14,16 @@ module.exports = function(app) {
     });
 
     //POST request to register webhook 
-    app.post("/api/webhooks", async function(request, response) {
+    app.post("/api/webhooks", function(request, response) {
         let res = WebhookControllerObj.registerWebhooks(request.body);
+        response.send(res);
         response.status(200).end();
     });
 
     //POST request to trigger webhooks
     app.post("/api/webhooks/test", async function(request, response) {
-        let res = WebhookControllerObj.triggerWebhooks(request.body);
+        let res = await WebhookControllerObj.triggerWebhooks(request.body);
+        response.send(res);
         response.status(200).end();
     });
 
