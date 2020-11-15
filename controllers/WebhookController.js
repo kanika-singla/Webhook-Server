@@ -44,6 +44,11 @@ class WebhookController {
             this.response.message = "Request body is invalid.";
             return this.response;
         }
+        if(webhooks.length == 0) {
+            this.response.error = 0;
+            this.response.message = "No webhooks found.";
+            return this.response;
+        }
         try {
             for(var i=0; i<webhooks.length; i++) {
                 let responseFromWebhook = await this.sendRequestToWebhook(webhooks[i], request.payload);
