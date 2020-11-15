@@ -21,6 +21,7 @@ module.exports = function(app) {
 
     //POST request to trigger webhooks
     app.post("/api/webhooks/test", async function(request, response) {
+        let res = WebhookControllerObj.triggerWebhooks(request.body);
         response.send({
             msg: "Webhook triggered!"
         });
