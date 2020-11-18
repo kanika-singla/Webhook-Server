@@ -8,6 +8,9 @@ by some web APIs such as Github, Facebook, Stripe and many others.
   * Express framework
   * NodeJS libraries:
       * dotenv
+      * body-parser
+      * axios
+  * JEST (Testing framework)
       
 ### Pre-requisites
   * NodeJS installed (^12.18.3)
@@ -49,6 +52,6 @@ by some web APIs such as Github, Facebook, Stripe and many others.
 ### Assumptions:
  * Two webhooks with the same URL will not be registered.
  * Response will consist of `error` boolean key/value to indicate any error in response.
- * Only 2 endpoints are required for the task: Register and Triggering/Test.
+ * Only 2 endpoints are required for the task: Register and Triggering/Test Webhooks.
  * The tests are also around the two endpoints only. 
  
