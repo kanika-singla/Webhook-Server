@@ -7,10 +7,20 @@ class WebhookController {
         message: ""
     };
 
+    /**
+     * Function to return current list of webhooks.
+     * This is just for me to better understand how the server is working, we can omit this out if not needed.
+     */
     getWebhooks() {
         return webhooks;
     }
 
+    /**
+     * Function to register webhooks on the webhook server.
+     * It accepts an object with 2 values: url and token.
+     * @param {Object} reqWebhook : { url: "", token: ""}
+     * @returns {Object} response: {error: 0/1, message: ""}
+     */
     registerWebhooks(reqWebhook) {
         try {
             if( !(reqWebhook.hasOwnProperty("url") && reqWebhook.hasOwnProperty("token")) ) {
@@ -37,6 +47,12 @@ class WebhookController {
         }
     }
 
+    /**
+     * Function to trigger webhooks on the webhook server.
+     * It accepts an object with 1 value: payload.
+     * @param {Object} request : { payload: [] }
+     * @returns {Object} response: {error: 0/1, message: ""}
+     */
     async triggerWebhooks(request) {
         let responseArray = [];
         if( !request.hasOwnProperty("payload") ) {
@@ -64,10 +80,21 @@ class WebhookController {
         }
     }
 
+    /**
+     * Function to check if webhook already exists
+     * @param {Object} reqWebhook : {url: "", token: ""}
+     * @returns {Boolean} true/false
+     */
     checkIfWebhookExists(reqWebhook) {
         return webhooks.some(webhook => webhook.url === reqWebhook.url);
     }
 
+    /**
+     * Function to send request to each webhook present in the application.
+     * @param {Object} webhook: {url: "", token: ""} 
+     * @param {Array} payload: ["any", { "valid": "JSON" }] 
+     * @returns {Object} : { url: "", message: "", response: ""}
+     */
     async sendRequestToWebhook(webhook, payload) {
         try {
             let params = {
@@ -77,13 +104,13 @@ class WebhookController {
             let response = await axios.post(webhook.url, params, {timeout: 1000}, {validateStatus: true});
             return {
                 url: webhook.url,
-                msg: "Success while testing for payload",
+                message: "Success while testing for payload",
                 response: response
             }
         } catch(error) {
             return {
                 url: webhook.url,
-                msg: "Error while testing for payload",
+                message: "Error while testing for payload",
                 error: error
             }
         }

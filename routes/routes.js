@@ -7,7 +7,7 @@ module.exports = function(app) {
     app.use(bodyParser.json()) // for parsing application/json
     app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
-
+    //GET request to list all the webhooks
     app.get("/", function(request, response) {
         let res = WebhookControllerObj.getWebhooks();
         response.send(res);

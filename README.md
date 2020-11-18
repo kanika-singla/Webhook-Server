@@ -48,6 +48,7 @@ by some web APIs such as Github, Facebook, Stripe and many others.
  * URL validation is not taken care of.
  * Deployment is not done and din't use `ngrok` nodejs module for dynamic URL.
  * List of webhooks displayed when performing GET request on "http://localhost:9876". This is just for my understanding if the server works as expected, it can be removed if needed.
+ * Returning `error: 0` if same webhook url is trying to register or when we trigger with 0 webhooks.
 
 ### Assumptions:
  * Two webhooks with the same URL will not be registered.
