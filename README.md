@@ -32,10 +32,23 @@ by some web APIs such as Github, Facebook, Stripe and many others.
       "token": "foo"
       }`
 
-  * Trigger a Webhook:
+  * Trigger Webhooks:
   
     Clients should be able to trigger all registered webhooks by making a POST request to `/api/webhooks/test` with a request body such as the following:
     
       `{
         "payload": ["any", { "valid": "JSON" }]
        }`
+       
+### Intentional Limitations:
+ * Authentication is not done on the API layer.
+ * URL validation is not taken care of.
+ * Deployment is not done and din't use `ngrok` nodejs module for dynamic URL.
+ * List of webhooks displayed when performing GET request on "http://localhost:9876". This is just for my understanding if the server works as expected, it can be removed if needed.
+
+### Assumptions:
+ * Two webhooks with the same URL will not be registered.
+ * Response will consist of `error` boolean key/value to indicate any error in response.
+ * Only 2 endpoints are required for the task: Register and Triggering/Test.
+ * The tests are also around the two endpoints only. 
+ 
